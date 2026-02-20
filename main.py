@@ -1,9 +1,9 @@
-from fastapi import FastAPI
-from fastapi.responses import HTMLResponse  # to get the response in human readable form not in JSON
-
+from fastapi import FastAPI,Request
+from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
 
+templates = Jinja2Templates(directory="templates")
 
 post: list[dict] = [
     {
@@ -23,10 +23,13 @@ post: list[dict] = [
 ]
 
 
-@app.get("/",response_class=HTMLResponse)
-def home():
-    return f"<h1>{post[0]['title']}</h1>"
+@app.get("/",include_in_schema=False)
+@app.get("/posts",include_in_schema=False)
+def home(request:Request):
+    return templates.TemplateResponse(request,"home.html")
+
 
 @app.get("/api/posts")
 def get_posts():
     return post
+
