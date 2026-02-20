@@ -5,7 +5,7 @@ app = FastAPI()
 
 templates = Jinja2Templates(directory="templates")
 
-post: list[dict] = [
+posts: list[dict] = [
     {
         "id": 1,
         "author": "Ratnesh Kumar",
@@ -26,10 +26,11 @@ post: list[dict] = [
 @app.get("/",include_in_schema=False)
 @app.get("/posts",include_in_schema=False)
 def home(request:Request):
-    return templates.TemplateResponse(request,"home.html")
+    return templates.TemplateResponse(request,"home.html"
+                                      ,{"posts":posts,"title":"Home"})
 
 
 @app.get("/api/posts")
 def get_posts():
-    return post
+    return posts
 
