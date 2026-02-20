@@ -7,6 +7,9 @@
 </head>
 <body>
     <h1>Home Page</h1>
-    <p>This is using a template </p>
+    {% for post in posts %}
+    <h2> {{ post.title }}</h2>
+    <p>{{ post.content }}</p>
+    {% end for %}
 </body>
 </html>
