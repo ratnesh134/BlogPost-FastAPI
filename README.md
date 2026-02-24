@@ -1,1 +1,2 @@
-# BlogPost-FastAPI
+# BlogPost-FastAP
+initial setup completeI
